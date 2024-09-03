@@ -1,8 +1,11 @@
+import cors from 'cors'
 import express from 'express'
+
 import type { Issue } from './types';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json()); 
 
 let issues: Issue[] = [
@@ -35,7 +38,7 @@ let issues: Issue[] = [
 
 app.get('/issues', (_: express.Request, res: express.Response) => {
     res.send(issues);
-});
+}); 
 
 app.post('/issues', (req: express.Request, res: express.Response) => {
     if (req.body.title && req.body.description) {
