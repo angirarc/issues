@@ -1,30 +1,21 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SnackbarProvider } from "notistack";
 
-import { Issue } from "@/types/models";
 import useToggle from "@/hooks/useToggle";
 import { useIssuesStore } from "@/store/issuesSore";
 
-import Modal from "@/components/Modal";
-import IssueCard from "@/components/IssueCard";
-import EditIssue from "@/components/EditIssue";
 import NewIssue from "@/components/AddIssue";
+import IssueCard from "@/components/IssueCard";
 
 export default function Home() {
   const { issues, getIssues } = useIssuesStore();
-  const [issue, setIssue] = useState<Issue>();
   const [isOpen, toggleOpen] = useToggle();
 
   useEffect(() => {
     getIssues()
   }, [getIssues])
-
-  const selectIssue = (x: Issue) => {
-    setIssue(x)
-    toggleOpen()
-  }
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-between p-24">
@@ -52,14 +43,6 @@ export default function Home() {
           <NewIssue
             isOpen={isOpen}
             onClose={toggleOpen} />
-          {/* <EditIssue
-            issue={issue}
-            isOpen={isOpen}
-            toggleOpen={toggleOpen}
-            onSubmit={() => {
-              toggleOpen()
-              getIssues()
-            }} /> */}
         </div>
       </div>
     </main>

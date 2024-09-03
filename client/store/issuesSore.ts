@@ -32,7 +32,7 @@ export const useIssuesStore = create<IssuesState>((set, get) => ({
 
         try {
             const { data } = await httpClient.get<Issue[]>('/issues');
-            set({ issues: data, loading: false });
+            set({ issues: data, issue: undefined, loading: false });
         } catch (e) {
             enqueueSnackbar(getErrorMessage(e), { variant: 'error' });
         }

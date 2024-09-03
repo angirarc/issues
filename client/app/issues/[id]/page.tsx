@@ -52,18 +52,22 @@ export default function SingleIssue({ params }: { params: { id: string } }) {
                     <Link href="/"><Back fontSize={20} /></Link>
                     <h2 className="ml-3 text-2xl">{issue?.title}</h2>
                 </div>
-                <form className="w-full mt-3">
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                        <div className="w-full md:w-full px-3 mb-6">
-                            <label className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" htmlFor="issue_title">Issue Title</label>
-                            <input defaultValue={issue?.title} onChange={(e) => setTitle(e.target.value)} value={title} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#98c01d]" type="text" name="issue_title" placeholder="Issue Title" required />
+                {
+                    issue ?
+                    <form className="w-full mt-3">
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full md:w-full px-3 mb-6">
+                                <label className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" htmlFor="issue_title">Issue Title</label>
+                                <input defaultValue={issue?.title} onChange={(e) => setTitle(e.target.value)} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#98c01d]" type="text" name="issue_title" placeholder="Issue Title" required />
+                            </div>
+                            <div className="w-full px-3 mb-6">
+                                <label className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" htmlFor="issue_description">Issue Description</label>
+                                <textarea defaultValue={issue?.description} onChange={(e) => setDesc(e.target.value)} rows={4} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#98c01d]" name="issue_description" required />
+                            </div>
                         </div>
-                        <div className="w-full px-3 mb-6">
-                            <label className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" htmlFor="issue_description">Issue Description</label>
-                            <textarea defaultValue={issue?.description} onChange={(e) => setDesc(e.target.value)} value={description} rows={4} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#98c01d]" name="issue_description" required />
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                    : <p>Loading...</p>
+                }
                 <div className="flex justify-end pt-2">
                     <Link href="/">
                         <button className="focus:outline-none modal-close px-4 bg-gray-500 p-3 rounded-lg text-white hover:bg-gray-400">Back</button>
